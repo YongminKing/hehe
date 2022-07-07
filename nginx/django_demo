@@ -1,0 +1,14 @@
+server {
+    listen 80;
+    server_name 3.39.177.230;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        alias /home/ubuntu/SUS-3-LIVE/static/;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/ubuntu/SUS-3-LIVE/gunicorn/django.sock;
+    }
+}
